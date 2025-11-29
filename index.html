@@ -110,5 +110,355 @@
                     <div class="absolute -top-6 right-4 w-16 h-16 bg-pink-100 rounded-full blur-xl opacity-70"></div>
 
                     <!-- Badge Thème -->
-                    <div class="absolute top-0 right-0 bg-pink-50/90 px-4 py-2 rounded-bl-3xl text-[11px] font-bold text-pink-500 uppercase tracking-[0.22em] b
+                    <div class="absolute top-0 right-0 bg-pink-50/90 px-4 py-2 rounded-bl-3xl text-[11px] font-bold text-pink-500 uppercase tracking-[0.22em] border-l border-b border-pink-100" id="topic-badge">
+                        Thème
+                    </div>
 
+                    <p class="text-pink-500 font-semibold text-xs mb-2 tracking-[0.18em] uppercase">
+                        Question <span id="q-number">1</span> / 10
+                    </p>
+                    
+                    <h3 id="question-text" class="text-xl md:text-2xl font-bold mb-6 text-rose-900 leading-snug">
+                        Chargement...
+                    </h3>
+                    
+                    <!-- Options -->
+                    <div id="options-list" class="space-y-3">
+                        <!-- Options injectées par JS -->
+                    </div>
+
+                    <!-- Zone de Feedback -->
+                    <div id="feedback-box" class="hidden mt-7 p-5 rounded-2xl bg-rose-50 border border-rose-100 animate-fade-in">
+                        <!-- Texte de correction injecté ici -->
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="mt-8 pt-5 border-t border-pink-100 flex justify-end gap-3">
+                        <button
+                            id="btn-validate"
+                            onclick="app.validate()"
+                            class="bg-rose-900 hover:bg-rose-950 text-rose-50 font-semibold py-3 px-6 md:px-8 rounded-2xl text-sm md:text-base transition shadow-md hover:shadow-lg shadow-rose-300"
+                        >
+                            Valider ma réponse
+                        </button>
+                        <button
+                            id="btn-next"
+                            onclick="app.next()"
+                            class="hidden bg-gradient-to-r from-pink-500 to-fuchsia-500 hover:from-pink-600 hover:to-fuchsia-600 text-white font-semibold py-3 px-6 md:px-8 rounded-2xl text-sm md:text-base transition shadow-md hover:shadow-lg shadow-pink-300 flex items-center gap-2"
+                        >
+                            Suivant <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Écran de Résultats -->
+            <div id="result-screen" class="hidden bg-white/90 backdrop-blur rounded-3xl shadow-xl shadow-pink-200 p-8 text-center border border-pink-100">
+                <div class="w-24 h-24 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner shadow-pink-200">
+                    <i class="fa-solid fa-award text-5xl text-pink-500"></i>
+                </div>
+                <h2 class="text-3xl font-bold mb-2 text-rose-900">Terminé !</h2>
+                <p class="text-rose-500 mb-6 text-sm">Voici ta performance finale sur ce QCM de l’enfer (mignon, mais de l’enfer quand même) 🔥</p>
+                
+                <div class="inline-block border-4 border-pink-500 rounded-3xl p-6 mb-6 bg-pink-50 shadow-md shadow-pink-200">
+                    <div class="text-6xl font-black text-pink-600 leading-none mb-1 tracking-tight">
+                        <span id="final-score">0</span>
+                    </div>
+                    <div class="text-xs font-semibold text-pink-400 uppercase tracking-[0.3em]">Points</div>
+                </div>
+                
+                <p class="text-xs text-rose-400 mb-6">
+                    Score maximum théorique : <span id="max-score">0</span> pts
+                </p>
+
+                <div id="final-message" class="p-4 rounded-2xl mb-8 text-base font-medium"></div>
+
+                <button
+                    onclick="location.reload()"
+                    class="bg-white border-2 border-pink-400 text-pink-600 hover:bg-pink-50 font-semibold py-3 px-8 rounded-2xl transition shadow-sm hover:shadow-md"
+                >
+                    Recommencer le test 💫
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="text-center p-4 text-rose-400 text-[11px]">
+        &copy; 2025 Dauphine Review - Blockchain Expert ✨
+    </footer>
+
+    <!-- DONNÉES ET LOGIQUE DU QUIZ (inchangées) -->
+    <script>
+        const quizData = [
+            {
+                topic: "Architecture",
+                question: "Concernant le passage d'Ethereum au Proof of Stake (The Merge) :",
+                options: [
+                    { id: 0, text: "La mise à jour a réduit les frais de gaz (Gas fees) de manière significative.", isCorrect: false },
+                    { id: 1, text: "Elle a réduit la consommation énergétique du réseau de plus de 99 %.", isCorrect: true },
+                    { id: 2, text: "Elle permet aux validateurs de retirer leurs ETH stakés immédiatement.", isCorrect: false },
+                    { id: 3, text: "Les validateurs risquent le 'Slashing' en cas de faute grave.", isCorrect: true }
+                ],
+                explain: "Le Merge a changé le consensus (énergie, sécurité) mais n'a pas augmenté la capacité de bloc, donc les frais n'ont pas baissé (c'est le rôle des Layer 2). Le retrait des ETH a nécessité une autre mise à jour (Shanghai)."
+            },
+            {
+                topic: "Scalabilité",
+                question: "À propos des solutions de Scalabilité (Rollups) :",
+                options: [
+                    { id: 0, text: "Les Optimistic Rollups utilisent des preuves de fraude (Fraud Proofs).", isCorrect: true },
+                    { id: 1, text: "Les ZK-Rollups utilisent des preuves de validité mathématique.", isCorrect: true },
+                    { id: 2, text: "Une Sidechain hérite totalement de la sécurité d'Ethereum.", isCorrect: false },
+                    { id: 3, text: "La Disponibilité des Données (Data Availability) sur L1 est critique.", isCorrect: true }
+                ],
+                explain: "Les Sidechains ont leurs propres validateurs et sont moins sécurisées. Les Rollups héritent de la sécurité car ils publient leurs données sur Ethereum."
+            },
+            {
+                topic: "DeFi",
+                question: "Concernant les AMM (ex: Uniswap) :",
+                options: [
+                    { id: 0, text: "Ils utilisent un carnet d'ordres centralisé.", isCorrect: false },
+                    { id: 1, text: "Les fournisseurs de liquidité risquent l'Impermanent Loss.", isCorrect: true },
+                    { id: 2, text: "La Liquidité Concentrée (v3) améliore l'efficacité du capital.", isCorrect: true },
+                    { id: 3, text: "Les frais de trading sont brûlés (détruits).", isCorrect: false }
+                ],
+                explain: "Les AMM n'ont pas de carnet d'ordres. Les frais sont versés aux fournisseurs de liquidité (LPs), pas brûlés."
+            },
+            {
+                topic: "Stablecoins",
+                question: "À propos des Stablecoins :",
+                options: [
+                    { id: 0, text: "USDC et USDT sont centralisés avec réserves Off-Chain.", isCorrect: true },
+                    { id: 1, text: "DAI est décentralisé et sur-collatéralisé par des cryptos.", isCorrect: true },
+                    { id: 2, text: "L'UST (Terra) a échoué à cause de son modèle algorithmique.", isCorrect: true },
+                    { id: 3, text: "Tous les stablecoins sont garantis par de l'or.", isCorrect: false }
+                ],
+                explain: "Seuls certains stablecoins comme PAXG sont garantis par de l'or. Les plus gros (USDT/USDC) utilisent des dollars et bons du trésor."
+            },
+            {
+                topic: "Infrastructure",
+                question: "La 'Maximal Extractable Value' (MEV) :",
+                options: [
+                    { id: 0, text: "Est une valeur extraite en réorganisant l'ordre des transactions.", isCorrect: true },
+                    { id: 1, text: "L'attaque 'Sandwich' est une forme courante de MEV.", isCorrect: true },
+                    { id: 2, text: "La MEV a totalement disparu avec le Proof of Stake.", isCorrect: false },
+                    { id: 3, text: "Flashbots est un outil pour gérer la MEV.", isCorrect: true }
+                ],
+                explain: "La MEV existe toujours sous PoS (elle est capturée par les validateurs et les constructeurs de blocs)."
+            },
+            {
+                topic: "DeFi Avancée",
+                question: "Concernant les Flash Loans (Prêts Flash) :",
+                options: [
+                    { id: 0, text: "Ils nécessitent un collatéral (garantie) de 150%.", isCorrect: false },
+                    { id: 1, text: "L'emprunt et le remboursement se font dans la même transaction.", isCorrect: true },
+                    { id: 2, text: "Si l'emprunteur ne rembourse pas, la transaction est annulée.", isCorrect: true },
+                    { id: 3, text: "Ils sont souvent utilisés pour l'arbitrage.", isCorrect: true }
+                ],
+                explain: "La spécificité du Flash Loan est l'absence de collatéral grâce à l'atomicité de la transaction blockchain."
+            },
+            {
+                topic: "Interopérabilité",
+                question: "Les Ponts (Bridges) blockchain :",
+                options: [
+                    { id: 0, text: "Le mécanisme 'Lock & Mint' est très courant.", isCorrect: true },
+                    { id: 1, text: "Si la blockchain A est hackée, les tokens sur B ne craignent rien.", isCorrect: false },
+                    { id: 2, text: "Les bridges sont historiquement des cibles fréquentes de hacks.", isCorrect: true },
+                    { id: 3, text: "Le protocole IBC (Cosmos) permet l'interopérabilité native.", isCorrect: true }
+                ],
+                explain: "Si le coffre sur la chaîne A est vidé, les tokens synthétiques sur la chaîne B perdent leur valeur (depeg)."
+            },
+            {
+                topic: "Bitcoin",
+                question: "Évolutions de Bitcoin :",
+                options: [
+                    { id: 0, text: "Lightning Network est un Layer 2 de paiement rapide.", isCorrect: true },
+                    { id: 1, text: "Taproot améliore la confidentialité et l'efficacité.", isCorrect: true },
+                    { id: 2, text: "Les Ordinals permettent de créer des NFT sur Bitcoin.", isCorrect: true },
+                    { id: 3, text: "Bitcoin supporte nativement les smart contracts complexes (Solidity).", isCorrect: false }
+                ],
+                explain: "Bitcoin utilise un langage de script limité (Script) et ne supporte pas nativement les smart contracts complexes comme Ethereum."
+            },
+            {
+                topic: "Wallet",
+                question: "L'Abstraction de Compte (Account Abstraction) :",
+                options: [
+                    { id: 0, text: "Transforme les wallets en Smart Contracts.", isCorrect: true },
+                    { id: 1, text: "Permet la récupération sociale du compte.", isCorrect: true },
+                    { id: 2, text: "Permet de payer le gaz avec un token (ex: USDC) au lieu d'ETH.", isCorrect: true },
+                    { id: 3, text: "Rend toutes les transactions invisibles sur la blockchain.", isCorrect: false }
+                ],
+                explain: "L'Account Abstraction améliore l'expérience utilisateur (UX) mais ne rend pas la blockchain privée ou anonyme."
+            },
+            {
+                topic: "Théorie",
+                question: "Le Trilemme de la Blockchain concerne l'équilibre entre :",
+                options: [
+                    { id: 0, text: "Confidentialité", isCorrect: false },
+                    { id: 1, text: "Décentralisation", isCorrect: true },
+                    { id: 2, text: "Sécurité", isCorrect: true },
+                    { id: 3, text: "Scalabilité", isCorrect: true }
+                ],
+                explain: "Le trilemme classique est : Décentralisation, Sécurité, Scalabilité. La confidentialité est un autre sujet."
+            }
+        ];
+
+        const app = {
+            currentIdx: 0,
+            score: 0,
+            maxScore: 0,
+
+            init: function() {
+                this.maxScore = quizData.reduce((acc, q) => {
+                    return acc + q.options.filter(o => o.isCorrect).length;
+                }, 0);
+            },
+
+            startQuiz: function() {
+                document.getElementById('intro-screen').classList.add('hidden');
+                document.getElementById('quiz-screen').classList.remove('hidden');
+                this.loadQuestion();
+            },
+
+            loadQuestion: function() {
+                const q = quizData[this.currentIdx];
+                
+                document.getElementById('q-number').innerText = this.currentIdx + 1;
+                document.getElementById('question-text').innerText = q.question;
+                document.getElementById('topic-badge').innerText = q.topic;
+                
+                const progress = ((this.currentIdx) / quizData.length) * 100;
+                document.getElementById('progress-bar').style.width = `${progress}%`;
+
+                document.getElementById('btn-validate').classList.remove('hidden');
+                document.getElementById('btn-next').classList.add('hidden');
+                document.getElementById('feedback-box').classList.add('hidden');
+
+                const list = document.getElementById('options-list');
+                list.innerHTML = '';
+
+                q.options.forEach((opt, idx) => {
+                    const label = document.createElement('label');
+                    label.className = "checkbox-wrapper cursor-pointer block relative group";
+                    label.innerHTML = `
+                        <input type="checkbox" name="opt" value="${idx}" class="peer sr-only">
+                        <div class="relative p-4 md:p-5 rounded-2xl border-2 border-rose-100 hover:border-pink-300 transition-all duration-200 flex items-center justify-between bg-white/80 peer-checked:border-pink-500 peer-checked:bg-pink-50">
+                            <span class="text-rose-900 font-medium text-sm md:text-lg pr-3">${opt.text}</span>
+                            <div class="check-icon opacity-0 text-pink-500 transition-all transform scale-50">
+                                <i class="fa-solid fa-circle-check text-2xl"></i>
+                            </div>
+                        </div>
+                    `;
+                    list.appendChild(label);
+                });
+            },
+
+            validate: function() {
+                const inputs = document.querySelectorAll('input[name="opt"]');
+                const q = quizData[this.currentIdx];
+                let questionScore = 0;
+
+                inputs.forEach(input => {
+                    input.disabled = true;
+                    const idx = parseInt(input.value);
+                    const isChecked = input.checked;
+                    const isCorrect = q.options[idx].isCorrect;
+                    const div = input.nextElementSibling;
+
+                    if (isCorrect) {
+                        div.classList.remove('border-rose-100', 'bg-white/80');
+                        div.classList.add('border-emerald-400', 'bg-emerald-50');
+                        if (isChecked) {
+                            questionScore += 1;
+                            div.innerHTML += '<span class="absolute top-2 right-2 bg-emerald-200 text-emerald-800 text-[10px] font-bold px-2 py-1 rounded-full">+1</span>';
+                        } else {
+                            div.innerHTML += '<span class="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-[10px] font-bold px-2 py-1 rounded-full">Manqué</span>';
+                        }
+                    } else if (isChecked && !isCorrect) {
+                        questionScore -= 0.5;
+                        div.classList.add('border-red-400', 'bg-red-50');
+                        div.innerHTML += '<span class="absolute top-2 right-2 bg-red-200 text-red-800 text-[10px] font-bold px-2 py-1 rounded-full">-0.5</span>';
+                        const icon = div.querySelector('.check-icon i');
+                        if (icon) {
+                            icon.className = "fa-solid fa-circle-xmark text-red-500 text-2xl";
+                            div.querySelector('.check-icon').style.opacity = "1";
+                        }
+                    }
+                });
+
+                this.score += questionScore;
+                
+                const scoreEl = document.getElementById('current-score');
+                scoreEl.innerText = this.score;
+                const pill = scoreEl.parentElement;
+
+                if (questionScore < 0) {
+                    pill.classList.add('bg-red-500');
+                    setTimeout(() => pill.classList.remove('bg-red-500'), 500);
+                } else if (questionScore > 0) {
+                    pill.classList.add('bg-emerald-500');
+                    setTimeout(() => pill.classList.remove('bg-emerald-500'), 500);
+                }
+
+                const fbBox = document.getElementById('feedback-box');
+                fbBox.classList.remove('hidden');
+                
+                let scoreColor = questionScore > 0 ? 'text-emerald-700' : (questionScore < 0 ? 'text-red-700' : 'text-rose-700');
+                let scoreText = questionScore > 0 ? `+${questionScore}` : questionScore;
+
+                fbBox.innerHTML = `
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border border-rose-200 text-pink-500">
+                            <i class="fa-solid fa-sparkles"></i>
+                        </span>
+                        <span class="text-lg font-bold ${scoreColor}">Résultat : ${scoreText} pts</span>
+                    </div>
+                    <p class="text-rose-700 text-sm leading-relaxed"><i class="fa-solid fa-lightbulb text-yellow-400 mr-2"></i>${q.explain}</p>
+                `;
+
+                document.getElementById('btn-validate').classList.add('hidden');
+                const nextBtn = document.getElementById('btn-next');
+                nextBtn.classList.remove('hidden');
+                
+                if (this.currentIdx === quizData.length - 1) {
+                    nextBtn.innerHTML = 'Voir mon bilan <i class="fa-solid fa-flag-checkered ml-2 text-xs"></i>';
+                }
+            },
+
+            next: function() {
+                if (this.currentIdx < quizData.length - 1) {
+                    this.currentIdx++;
+                    this.loadQuestion();
+                } else {
+                    this.showResults();
+                }
+            },
+
+            showResults: function() {
+                document.getElementById('quiz-screen').classList.add('hidden');
+                document.getElementById('result-screen').classList.remove('hidden');
+                
+                document.getElementById('final-score').innerText = this.score;
+                document.getElementById('max-score').innerText = this.maxScore;
+
+                const msgDiv = document.getElementById('final-message');
+                const ratio = this.score / this.maxScore;
+
+                if (ratio >= 0.8) {
+                    msgDiv.className = "bg-emerald-50 text-emerald-800 p-6 rounded-2xl border border-emerald-200 text-sm md:text-base";
+                    msgDiv.innerHTML = "<strong>Excellent ! 🚀</strong><br>Tu es prête pour la DeFi et le Web3, version pro & fabulous.";
+                } else if (ratio >= 0.5) {
+                    msgDiv.className = "bg-blue-50 text-blue-800 p-6 rounded-2xl border border-blue-200 text-sm md:text-base";
+                    msgDiv.innerHTML = "<strong>Bien joué ! 👍</strong><br>Les bases sont là. Encore un peu de révisions et tu seras on-chain unstoppable.";
+                } else {
+                    msgDiv.className = "bg-red-50 text-red-800 p-6 rounded-2xl border border-red-200 text-sm md:text-base";
+                    msgDiv.innerHTML = "<strong>Attention ⚠️</strong><br>Les malus t’ont fait mal… Revois les consensus & la DeFi, et reviens farm le QCM.";
+                }
+            }
+        };
+
+        app.init();
+    </script>
+</body>
+</html>
