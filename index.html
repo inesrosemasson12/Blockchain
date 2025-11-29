@@ -1,0 +1,439 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.44">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Apple Color Emoji'}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="fr"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Examen Blockchain Expert - Dauphine&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Importation du design (Tailwind CSS) et des icônes --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: 'Inter', sans-serif; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Styles pour le feedback des checkboxes */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.checkbox-wrapper input:checked + div {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #4f46e5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #eef2ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.checkbox-wrapper input:checked + div .check-icon {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Animation d'apparition */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes fadeIn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>from { opacity: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>to { opacity: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.animate-fade-in {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: fadeIn 0.5s ease-out;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- En-tête --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="bg-indigo-900 text-white p-4 shadow-lg sticky top-0 z-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-3xl mx-auto flex justify-between items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-lg md:text-xl font-bold flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;i class="fa-solid fa-link mr-2"&gt;&lt;/i&gt;Blockchain Expert</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="text-sm bg-indigo-800 px-4 py-1.5 rounded-full border border-indigo-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Score actuel: &lt;span id="current-score" class="font-bold text-white"&gt;0&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Contenu Principal --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="flex-grow p-4 md:p-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-3xl mx-auto"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Écran d'Introduction --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="intro-screen" class="bg-white rounded-2xl shadow-xl p-8 border-t-8 border-indigo-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-3xl font-extrabold mb-6 text-slate-900"&gt;Examen Blanc Technique&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="font-bold text-blue-800 mb-2"&gt;<span class="s1">⚠️</span> Mode Expert Activé&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul class="list-disc list-inside space-y-1 text-blue-700 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;strong&gt;Choix Multiples :&lt;/strong&gt; Plusieurs réponses peuvent être correctes.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;strong&gt;Bonus :&lt;/strong&gt; &lt;span class="font-bold text-green-600"&gt;+1 point&lt;/span&gt; par bonne case cochée.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;strong&gt;Malus :&lt;/strong&gt; &lt;span class="font-bold text-red-500"&gt;-0.5 point&lt;/span&gt; par erreur.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;strong&gt;Neutre :&lt;/strong&gt; 0 point si vous ne cochez rien.&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="app.startQuiz()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-bold py-4 px-6 rounded-xl transition duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Lancer le QCM</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Écran du Quiz (Caché par défaut) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="quiz-screen" class="hidden space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Barre de progression --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="progress-bar" class="bg-indigo-500 h-3 rounded-full transition-all duration-500 ease-out" style="width: 0%"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 relative overflow-hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Badge Thème --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="absolute top-0 right-0 bg-gray-100 px-4 py-2 rounded-bl-xl text-xs font-bold text-gray-500 uppercase tracking-wider" id="topic-badge"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>Thème</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-indigo-500 font-bold text-sm mb-2"&gt;QUESTION &lt;span id="q-number"&gt;1&lt;/span&gt;/10&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 id="question-text" class="text-xl md:text-2xl font-bold mb-8 text-slate-800 leading-snug"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>Chargement...</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/h3&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Options --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="options-list" class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Les options seront insérées ici par JS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Zone de Feedback (Correction) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="feedback-box" class="hidden mt-8 p-6 rounded-xl bg-slate-50 border border-slate-200 animate-fade-in"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Le texte de correction ira ici --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Boutons d'action --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-8 pt-6 border-t border-gray-100 flex justify-end"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button id="btn-validate" onclick="app.validate()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-8 rounded-xl transition shadow-md hover:shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Valider ma réponse</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button id="btn-next" onclick="app.next()" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-md hover:shadow-lg flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Suivant &lt;i class="fa-solid fa-arrow-right ml-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Écran de Résultats (Caché par défaut) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="result-screen" class="hidden bg-white rounded-2xl shadow-xl p-8 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fa-solid fa-award text-5xl text-indigo-600"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-3xl font-bold mb-2 text-slate-800"&gt;Terminé !&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-slate-500 mb-8"&gt;Voici votre performance finale&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="inline-block border-4 border-indigo-500 rounded-2xl p-6 mb-8 bg-indigo-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="text-6xl font-black text-indigo-900 leading-none mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span id="final-score"&gt;0&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="text-sm font-semibold text-indigo-400 uppercase tracking-widest"&gt;Points&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-sm text-gray-400 mb-8"&gt;Score maximum théorique : &lt;span id="max-score"&gt;0&lt;/span&gt; pts&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="final-message" class="p-4 rounded-lg mb-8 text-lg font-medium"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="location.reload()" class="bg-white border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-bold py-3 px-8 rounded-xl transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Recommencer le test</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Pied de page --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer class="text-center p-4 text-gray-400 text-xs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&amp;copy; 2025 Dauphine Review - Blockchain Expert</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- DONNÉES ET LOGIQUE DU QUIZ --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const quizData = [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "Architecture",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "Concernant le passage d'Ethereum au Proof of Stake (The Merge) :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "La mise à jour a réduit les frais de gaz (Gas fees) de manière significative.", isCorrect: false },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "Elle a réduit la consommation énergétique du réseau de plus de 99 %.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "Elle permet aux validateurs de retirer leurs ETH stakés immédiatement.", isCorrect: false },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "Les validateurs risquent le 'Slashing' en cas de faute grave.", isCorrect: true }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "Le Merge a changé le consensus (énergie, sécurité) mais n'a pas augmenté la capacité de bloc, donc les frais n'ont pas baissé (c'est le rôle des Layer 2). Le retrait des ETH a nécessité une autre mise à jour (Shanghai)."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "Scalabilité",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "À propos des solutions de Scalabilité (Rollups) :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "Les Optimistic Rollups utilisent des preuves de fraude (Fraud Proofs).", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "Les ZK-Rollups utilisent des preuves de validité mathématique.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "Une Sidechain hérite totalement de la sécurité d'Ethereum.", isCorrect: false },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "La Disponibilité des Données (Data Availability) sur L1 est critique.", isCorrect: true }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "Les Sidechains ont leurs propres validateurs et sont moins sécurisées. Les Rollups héritent de la sécurité car ils publient leurs données sur Ethereum."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "DeFi",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "Concernant les AMM (ex: Uniswap) :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "Ils utilisent un carnet d'ordres centralisé.", isCorrect: false },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "Les fournisseurs de liquidité risquent l'Impermanent Loss.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "La Liquidité Concentrée (v3) améliore l'efficacité du capital.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "Les frais de trading sont brûlés (détruits).", isCorrect: false }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "Les AMM n'ont pas de carnet d'ordres. Les frais sont versés aux fournisseurs de liquidité (LPs), pas brûlés."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "Stablecoins",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "À propos des Stablecoins :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "USDC et USDT sont centralisés avec réserves Off-Chain.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "DAI est décentralisé et sur-collatéralisé par des cryptos.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "L'UST (Terra) a échoué à cause de son modèle algorithmique.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "Tous les stablecoins sont garantis par de l'or.", isCorrect: false }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "Seuls certains stablecoins comme PAXG sont garantis par de l'or. Les plus gros (USDT/USDC) utilisent des dollars et bons du trésor."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "Infrastructure",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "La 'Maximal Extractable Value' (MEV) :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "Est une valeur extraite en réorganisant l'ordre des transactions.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "L'attaque 'Sandwich' est une forme courante de MEV.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "La MEV a totalement disparu avec le Proof of Stake.", isCorrect: false },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "Flashbots est un outil pour gérer la MEV.", isCorrect: true }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "La MEV existe toujours sous PoS (elle est capturée par les validateurs et les constructeurs de blocs)."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "DeFi Avancée",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "Concernant les Flash Loans (Prêts Flash) :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "Ils nécessitent un collatéral (garantie) de 150%.", isCorrect: false },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "L'emprunt et le remboursement se font dans la même transaction.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "Si l'emprunteur ne rembourse pas, la transaction est annulée.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "Ils sont souvent utilisés pour l'arbitrage.", isCorrect: true }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "La spécificité du Flash Loan est l'absence de collatéral grâce à l'atomicité de la transaction blockchain."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "Interopérabilité",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "Les Ponts (Bridges) blockchain :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "Le mécanisme 'Lock &amp; Mint' est très courant.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "Si la blockchain A est hackée, les tokens sur B ne craignent rien.", isCorrect: false },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "Les bridges sont historiquement des cibles fréquentes de hacks.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "Le protocole IBC (Cosmos) permet l'interopérabilité native.", isCorrect: true }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "Si le coffre sur la chaîne A est vidé, les tokens synthétiques sur la chaîne B perdent leur valeur (depeg)."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "Bitcoin",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "Évolutions de Bitcoin :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "Lightning Network est un Layer 2 de paiement rapide.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "Taproot améliore la confidentialité et l'efficacité.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "Les Ordinals permettent de créer des NFT sur Bitcoin.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "Bitcoin supporte nativement les smart contracts complexes (Solidity).", isCorrect: false }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "Bitcoin utilise un langage de script limité (Script) et ne supporte pas nativement les smart contracts complexes comme Ethereum."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "Wallet",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "L'Abstraction de Compte (Account Abstraction) :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "Transforme les wallets en Smart Contracts.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "Permet la récupération sociale du compte.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "Permet de payer le gaz avec un token (ex: USDC) au lieu d'ETH.", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "Rend toutes les transactions invisibles sur la blockchain.", isCorrect: false }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "L'Account Abstraction améliore l'expérience utilisateur (UX) mais ne rend pas la blockchain privée ou anonyme."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topic: "Théorie",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>question: "Le Trilemme de la Blockchain concerne l'équilibre entre :",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 0, text: "Confidentialité", isCorrect: false },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 1, text: "Décentralisation", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 2, text: "Sécurité", isCorrect: true },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>{ id: 3, text: "Scalabilité", isCorrect: true }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explain: "Le trilemme classique est : Décentralisation, Sécurité, Scalabilité. La confidentialité est un autre sujet."</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const app = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentIdx: 0,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>score: 0,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>maxScore: 0,</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>init: function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Calcul du score max théorique</p>
+<p class="p1"><span class="Apple-converted-space">                </span>this.maxScore = quizData.reduce((acc, q) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return acc + q.options.filter(o =&gt; o.isCorrect).length;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}, 0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>startQuiz: function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('intro-screen').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('quiz-screen').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>this.loadQuestion();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadQuestion: function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const q = quizData[this.currentIdx];</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Mise à jour UI</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('q-number').innerText = this.currentIdx + 1;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('question-text').innerText = q.question;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('topic-badge').innerText = q.topic;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Barre de progression</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const progress = ((this.currentIdx) / quizData.length) * 100;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('progress-bar').style.width = `${progress}%`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Reset états</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('btn-validate').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('btn-next').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('feedback-box').classList.add('hidden');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Génération des options</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const list = document.getElementById('options-list');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>list.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>q.options.forEach((opt, idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const label = document.createElement('label');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>label.className = "checkbox-wrapper cursor-pointer block relative group";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>label.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;input type="checkbox" name="opt" value="${idx}" class="peer sr-only"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="p-4 md:p-5 rounded-xl border-2 border-slate-200 hover:border-indigo-300 transition-all duration-200 flex items-center justify-between bg-white peer-checked:border-indigo-500 peer-checked:bg-indigo-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-slate-700 font-medium text-lg"&gt;${opt.text}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="check-icon opacity-0 text-indigo-600 transition-all transform scale-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;i class="fa-solid fa-circle-check text-2xl"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>list.appendChild(label);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>validate: function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const inputs = document.querySelectorAll('input[name="opt"]');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const q = quizData[this.currentIdx];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let questionScore = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let anyChecked = false;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Calcul du score</p>
+<p class="p1"><span class="Apple-converted-space">                </span>inputs.forEach(input =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>input.disabled = true; // Désactiver les inputs</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const idx = parseInt(input.value);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const isChecked = input.checked;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const isCorrect = q.options[idx].isCorrect;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const div = input.nextElementSibling;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (isChecked) anyChecked = true;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Marquage visuel</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (isCorrect) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>div.classList.remove('border-slate-200', 'bg-white');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>div.classList.add('border-green-500', 'bg-green-50');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Ajout badge +1</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (isChecked) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>questionScore += 1;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>div.innerHTML += '&lt;span class="absolute top-2 right-2 bg-green-200 text-green-800 text-xs font-bold px-2 py-1 rounded"&gt;+1&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>div.innerHTML += '&lt;span class="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-xs font-bold px-2 py-1 rounded"&gt;Manqué&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (isChecked &amp;&amp; !isCorrect) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>questionScore -= 0.5;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>div.classList.remove('border-indigo-500', 'bg-indigo-50');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>div.classList.add('border-red-500', 'bg-red-50');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>div.innerHTML += '&lt;span class="absolute top-2 right-2 bg-red-200 text-red-800 text-xs font-bold px-2 py-1 rounded"&gt;-0.5&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Changer l'icône en croix</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>div.querySelector('.check-icon i').className = "fa-solid fa-circle-xmark text-red-500 text-2xl";</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>div.querySelector('.check-icon').style.opacity = "1";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>this.score += questionScore;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Mise à jour Score Header avec animation couleur</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const scoreEl = document.getElementById('current-score');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>scoreEl.innerText = this.score;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(questionScore &lt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scoreEl.parentElement.classList.add('bg-red-600');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>setTimeout(() =&gt; scoreEl.parentElement.classList.remove('bg-red-600'), 500);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if(questionScore &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scoreEl.parentElement.classList.add('bg-green-600');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>setTimeout(() =&gt; scoreEl.parentElement.classList.remove('bg-green-600'), 500);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Affichage Feedback</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const fbBox = document.getElementById('feedback-box');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>fbBox.classList.remove('hidden');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>let scoreColor = questionScore &gt; 0 ? 'text-green-700' : (questionScore &lt; 0 ? 'text-red-700' : 'text-gray-600');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let scoreText = questionScore &gt; 0 ? `+${questionScore}` : questionScore;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>fbBox.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center gap-3 mb-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="text-xl font-bold ${scoreColor}"&gt;Résultat : ${scoreText} pts&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-slate-600 leading-relaxed"&gt;&lt;i class="fa-solid fa-lightbulb text-yellow-500 mr-2"&gt;&lt;/i&gt;${q.explain}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Changement bouton</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('btn-validate').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const nextBtn = document.getElementById('btn-next');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>nextBtn.classList.remove('hidden');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (this.currentIdx === quizData.length - 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>nextBtn.innerHTML = 'Voir mon bilan &lt;i class="fa-solid fa-flag-checkered ml-2"&gt;&lt;/i&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>next: function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (this.currentIdx &lt; quizData.length - 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>this.currentIdx++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>this.loadQuestion();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>this.showResults();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>showResults: function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('quiz-screen').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('result-screen').classList.remove('hidden');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('final-score').innerText = this.score;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('max-score').innerText = this.maxScore;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const msgDiv = document.getElementById('final-message');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const ratio = this.score / this.maxScore;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (ratio &gt;= 0.8) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>msgDiv.className = "bg-green-100 text-green-800 p-6 rounded-xl";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>msgDiv.innerHTML = "&lt;strong&gt;Excellent ! <span class="s1">🚀</span>&lt;/strong&gt;&lt;br&gt;Vous êtes prêt pour la DeFi et le Web3. Le niveau technique est très solide.";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (ratio &gt;= 0.5) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>msgDiv.className = "bg-blue-100 text-blue-800 p-6 rounded-xl";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>msgDiv.innerHTML = "&lt;strong&gt;Bien joué ! <span class="s1">👍</span>&lt;/strong&gt;&lt;br&gt;Les bases sont acquises. Attention aux subtilités techniques et aux malus.";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>msgDiv.className = "bg-red-100 text-red-800 p-6 rounded-xl";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>msgDiv.innerHTML = "&lt;strong&gt;Attention <span class="s1">⚠️</span>&lt;/strong&gt;&lt;br&gt;Les points négatifs ont fait mal. Il faut revoir les mécanismes de consensus et les bases de la DeFi.";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Démarrage</p>
+<p class="p1"><span class="Apple-converted-space">        </span>app.init();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
